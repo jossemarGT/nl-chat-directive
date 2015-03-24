@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chat</title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" >
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <style media="screen">
+      .message-input { height: 90px !important; }
+      .chat-user-name { padding: 10px; }
+      .chat-message { padding: 5px; }
+      .message { background-color: #fff; text-align: left; display: block; padding: 10px 20px; position: relative; border-radius: 4px; }
+      .message-date { font-size: 10px; color: #888888; }
+      .chat-discussion { background: #eee; padding: 5px; overflow-y: auto; }
+    </style>
+  </head>
+  <body ng-app="directiveExample">
+    <div ng-controller="TestController" class="col-md-4 col-md-offset-4">
+      <div  nl-chat on-message-entered="enviar(message)">
+        <div class="chat-discussion">
+          <div class="chat-scroll-wrap">
+            <div class="chat-message"
+            ng-repeat="msg in mensajes | orderBy: msg.ts"
+            ng-class="::msg.mine ? 'mine': 'theirs'">
+              <div class="message">
+                <a class="message-author" href="#">{{::msg.username}}</a>
+                <div class="message-date">
+                  {{::msg.ts| date:'dd/MM/yyyy @ HH:mm:ss'}}
+                </div>
+                <div class="message-content">
+                  {{::msg.text}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="js/app.js" charset="utf-8"></script>
+    <script src="js/controllers.js" charset="utf-8"></script>
+    <script src="js/directives.js" charset="utf-8"></script>
+  </body>
+</html>
